@@ -1,0 +1,70 @@
+import random
+
+life_count, life_icon = 3, '\u2665'
+medkit_count, medkit_icon = 2, '[+] '
+money_count, money_icon = 3, '$'
+
+def draw():
+    global life_count
+    if life_count == 0:
+        print("""
+        your dead!-_-
+""")
+        quit()      
+
+    print(f"""___________________________________________________
+       I_I    money: {money_count * money_icon}
+       -|-    life : {life_count * life_icon}
+       / \\    medkits: {medkit_count * medkit_icon}
+       you  
+___________________________________________________              
+""")
+
+def prompt():
+    global life_count, medkit_count, money_count
+
+    choice = input("""___________________
+    What's next? 
+    - <a> battle
+    - <b> medkit
+    - <y> buy medkit
+___________________
+""")
+    if choice == 'a':
+        c = random.choice([0, 1, 1])
+        life_count = life_count - c
+        if c == 1:
+            print('ouch!Your shot!')
+        if c == 0:
+            money_count = money_count + 1
+            print('the enemi has missed.You have killed him!')
+    if choice == 'b':
+        if medkit_count == 0:
+            print('you don t have any medkit!')
+            return
+        life_count = life_count + 1
+        medkit_count = medkit_count - 1
+        print('you have received a heart.-1 medkit warning!')
+    if choice == 'y':
+        buy = input('buy 1 medkit [+] for 1 money $ ? y or n\n' )
+        if buy == 'y':
+            if money_count == 0:
+                print('you don t have any money!')
+                return
+        c = random.choice([0, 1, 0 , 0])
+        if c == 1:
+            print('the seller of medkits has no medkits. Sorry...')
+            return
+        if c == 0:
+            money_count = money_count - 1
+            medkit_count = medkit_count + 1
+            print('you have received one medkit.-1 money warning')
+
+
+def loop():
+    draw()
+    prompt()
+    loop()
+
+if __name__ == '__main__':
+    loop()
