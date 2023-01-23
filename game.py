@@ -23,7 +23,7 @@ ___________________________________________________
        I_I    money: {money_count * money_icon}
        -|-    life : {life_count * life_icon}
        / \\    medkits: {medkit_count * medkit_icon}
-       you    score: {score_count}
+       you    score: {score_count}                                
 ___________________________________________________              
 """)
 
@@ -38,14 +38,17 @@ def prompt():
 ___________________
 """)
     if choice == 'a':
-        c = random.choice([0, 1, 1])
-        life_count = life_count - c
+        c = random.choice([0, 1, 1, 2])
         if c == 1:
-            print('ouch!Your shot!')
+            print('ouch!Your hurt!')
+            life_count = life_count - 1
         if c == 0:
             money_count = money_count + 1
             score_count = score_count + 1
             print('the enemi has missed.You have killed him!')
+        if c == 2:
+            print('no enemis at vue...')
+            return
     if choice == 'b':
         if medkit_count == 0:
             print('you don t have any medkit!')
@@ -59,7 +62,7 @@ ___________________
             if money_count == 0:
                 print('you don t have any money!')
                 return
-        c = random.choice([0, 1, 0 , 0])
+        c = random.choice([0, 1, 0 , 0, 1, 0, 2])
         if c == 1:
             print('the seller of medkits has no medkits. Sorry...')
             return
@@ -67,6 +70,9 @@ ___________________
             money_count = money_count - 1
             medkit_count = medkit_count + 1
             print('you have received one medkit.-1 money warning')
+        if c == 2:
+            print('the seller of medkits is a hustler!!')
+            money_count = money_count - 1
 
 
 def loop():
