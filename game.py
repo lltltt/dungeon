@@ -20,7 +20,7 @@ ___________________________________________________
         quit()      
 
     print(f"""___________________________________________________
-       I_I    money: {money_count * money_icon}
+       0_0    money: {money_count * money_icon}
        -|-    life : {life_count * life_icon}
        / \\    medkits: {medkit_count * medkit_icon}
        you    score: {score_count}                                
@@ -50,8 +50,13 @@ ___________________
             print('no enemis at vue...')
             return
     if choice == 'b':
+        c = random.choice([0, 1])
         if medkit_count == 0:
             print('you don t have any medkit!')
+            return
+        if c == 1:
+            medkit_count = medkit_count - 1
+            print('you dit not use your medkit properly...')
             return
         life_count = life_count + 1
         medkit_count = medkit_count - 1
@@ -73,7 +78,7 @@ ___________________
         if c == 2:
             print('the seller of medkits is a hustler!!')
             money_count = money_count - 1
-
+        
 
 def loop():
     draw()
